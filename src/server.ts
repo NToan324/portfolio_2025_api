@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import connectDB from "./src/config/mongodb";
-import router from "./src/routers/index";
-import errorHandler from "./src/middleware/errorHandler";
+import connectDB from "./config/mongodb";
+import router from "./routers/index";
+import errorHandler from "./middleware/errorHandler";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
-import SocketService from "./src/services/socket.service";
-import SocketInstance from "./src/services/socket.instance";
+import SocketService from "./services/socket.service";
+import SocketInstance from "./services/socket.instance";
 import bodyParser from "body-parser";
 import dotEnv from "dotenv";
 dotEnv.config();
