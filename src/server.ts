@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import { createServer } from "node:http";
 import SocketService from "./services/socket.service";
 import SocketInstance from "./services/socket.instance";
+import helmet from "helmet";
 import bodyParser from "body-parser";
 import dotEnv from "dotenv";
 dotEnv.config();
@@ -16,11 +17,20 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: ["http://localhost:5173/portfolio", "http://localhost:5173"],
+    methods: ["GET", "POST", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   },
 });
 
-const port = process.env.NODE_ENV === "development" ? process.env.PORT : 5000;
+const port =
+  process.env.NODE_ENV === "development"
+    ? process.env.DEV_PORT || 5000
+    : process.env.PROD_PORT || 8080;
+
+
+//Security
+app.use(helmet());
 
 //Socket
 const socketService = new SocketService(io);
