@@ -16,7 +16,10 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173/portfolio", "http://localhost:5173"],
+    origin: [
+      "https://portfolio-2025-nine-phi.vercel.app",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   },
