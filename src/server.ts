@@ -7,7 +7,6 @@ import { Server } from "socket.io";
 import { createServer } from "node:http";
 import SocketService from "./services/socket.service";
 import SocketInstance from "./services/socket.instance";
-import helmet from "helmet";
 import bodyParser from "body-parser";
 import dotEnv from "dotenv";
 dotEnv.config();
@@ -27,10 +26,6 @@ const port =
   process.env.NODE_ENV === "development"
     ? process.env.DEV_PORT || 5000
     : process.env.PROD_PORT || 8080;
-
-
-//Security
-app.use(helmet());
 
 //Socket
 const socketService = new SocketService(io);
