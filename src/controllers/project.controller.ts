@@ -20,6 +20,12 @@ class ProjectController {
     const id = req.params.id;
     res.send(await projectService.getProject(id));
   }
+
+  async updateProjectById(req: Request, res: Response) {
+    const id = req.params.id;
+    const data = req.body;
+    res.send(await projectService.updateProjectById(id, data));
+  }
 }
 const projectController = new ProjectController();
 export default projectController;

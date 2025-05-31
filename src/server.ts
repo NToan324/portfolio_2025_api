@@ -25,10 +25,7 @@ const io = new Server(server, {
   },
 });
 
-const port =
-  process.env.NODE_ENV === "development"
-    ? process.env.DEV_PORT || 5000
-    : process.env.PROD_PORT || 8080;
+const port = process.env.PORT || 5000;
 
 //Socket
 const socketService = new SocketService(io);

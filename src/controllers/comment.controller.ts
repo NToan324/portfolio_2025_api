@@ -17,6 +17,12 @@ class CommentController {
   async deleteComments(req: Request, res: Response) {
     res.send(await commentService.deleteComments());
   }
+
+  async deleteCommentById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    res.send(await commentService.deleteCommentById(id));
+  }
 }
 
 const commentController = new CommentController();

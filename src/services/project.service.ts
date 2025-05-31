@@ -31,6 +31,19 @@ class ProjectService {
     }
     return new OkResponse("Project found", data);
   }
+
+  async updateProjectById(id: string, data: Project) {
+    if (!id) {
+      throw new BadRequestError("Project ID is required");
+    }
+    const updatedProject = await ProjectModel.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+    if (!updatedProject) {
+      throw new BadRequestError("Project not found");
+    }
+    return new OkResponse("Project updated", updatedProject);
+  }
 }
 
 const projectService = new ProjectService();

@@ -43,6 +43,7 @@ class CommentService {
     if (!response) {
       throw new BadRequestError("Error adding comment");
     }
+
     SocketInstance.getIO().emit(SOCKET_ACTION.GET_COMMENTS, response);
     return new OkResponse("Comment added", response);
   }
@@ -53,6 +54,18 @@ class CommentService {
       throw new BadRequestError("Error deleting comments");
     }
     return new OkResponse("Comments deleted", response);
+  }
+
+  async deleteCommentById(id: string) {
+    if (!id) {
+      throw new BadRequestError("Comment ID is required");
+    }
+    const response = await comment.findByIdAndDelete(id);
+    if (!response) {
+      throw new BadRequestError("Error deleting comment");
+    }
+    SocketInstance.getIO().emit(SOCKET_ACTION.GET_COMMENTS, response);
+    return new OkResponse("Comment deleted", response);
   }
 }
 
