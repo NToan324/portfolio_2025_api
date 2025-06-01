@@ -11,6 +11,27 @@ import bodyParser from "body-parser";
 import dotEnv from "dotenv";
 dotEnv.config();
 
+const whitelist = [
+  "https://portfolio-2025-nine-phi.vercel.app",
+  "http://localhost:5173",
+];
+
+const corsOptions = {
+  origin: function (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
 const app = express();
 const server = createServer(app);
 
@@ -36,7 +57,7 @@ SocketInstance.init(io);
 socketService.init();
 
 //Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "50mb" }));
