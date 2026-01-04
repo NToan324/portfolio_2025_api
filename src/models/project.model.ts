@@ -1,31 +1,34 @@
 import mongoose, { Schema, InferSchemaType } from "mongoose";
 
-const projectSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  urlImage: [
-    {
+const projectSchema = new Schema(
+  {
+    title: {
       type: String,
       required: true,
     },
-  ],
-  totalTechnology: [String],
-  totalFeature: [String],
-  urlDemo: {
-    type: String,
-    required: true,
+    description: {
+      type: String,
+      required: true,
+    },
+    urlImage: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+    totalTechnology: [String],
+    totalFeature: [String],
+    urlDemo: {
+      type: String,
+      required: true,
+    },
+    urlGithub: {
+      type: String,
+      required: true,
+    },
   },
-  urlGithub: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 const project = mongoose.model("project", projectSchema);
 type Project = InferSchemaType<typeof projectSchema>;
 

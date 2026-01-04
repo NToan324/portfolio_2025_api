@@ -10,7 +10,7 @@ class ProjectService {
     return new CreatedResponse("Project created", dataProject);
   }
   async getProjects() {
-    const dataProject = await ProjectModel.find();
+    const dataProject = await ProjectModel.find().sort({ createdAt: -1 });
     if (!dataProject) {
       throw new BadRequestError("Error getting projects");
     }
