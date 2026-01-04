@@ -14,6 +14,7 @@ dotEnv.config();
 const whitelist = [
   "https://portfolio-2025-nine-phi.vercel.app",
   "http://localhost:5173",
+  "https://portdeweb.id.vn",
 ];
 
 const corsOptions = {
@@ -37,11 +38,7 @@ const server = createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: [
-      "https://portfolio-2025-nine-phi.vercel.app",
-      "https://portdeweb.id.vn",
-      "http://localhost:5173",
-    ],
+    origin: whitelist,
     methods: ["GET", "POST", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   },
