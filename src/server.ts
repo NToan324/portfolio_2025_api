@@ -39,6 +39,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "https://portfolio-2025-nine-phi.vercel.app",
+      "https://portdeweb.id.vn",
       "http://localhost:5173",
     ],
     methods: ["GET", "POST", "DELETE"],
